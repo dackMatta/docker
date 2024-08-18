@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DockerFm</title>
+    <link rel="stylesheet" href="\assets\index.css">
+</head>
+<body>
+    <header>Welcome to docker tutorial</header>
+    <h2>Lets get you running with Docker </h2>
+<div class="container-grid">
+<div class="container-1">
+    <div class="container">
+        <h2>Build a simple html page</h2>
+        <pre id="code-block">
+            vim index.html
+
+        </pre>
+        <button onclick="copyToClipboard()">Copy to Clipboard</button>
+        <p class="message" id="message"></p>
+    </div>
+</div>
+<div class="container-1">
+    <div class="container">
+        <h2>Create a dockerfile</h2>
+        <pre id="code-block">
+            vim Dockerfile
+
+        </pre>
+        <button onclick="copyToClipboard()">Copy to Clipboard</button>
+        <p class="message" id="message"></p>
+    </div>
+</div>
+<div class="container-2">
+    <div class="container">
+        <h2>Add content to the dockerfile</h2>
+        <pre id="code-block">
+FROM ubuntu:16.04
+RUN apt-get update -y
+RUN apt-get install -y apache2
+RUN chown -R www-data:www-data /var/www/
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_LOG_DIR /var/log/apache2
+ENV APACHE_LOCK_DIR /var/lock/apache2
+ENV APACHE_PID_FILE /var/run/apache2.pid
+ADD index.html /var/www/html/
+EXPOSE 80
+ENTRYPOINT ["/usr/sbin/apache2ctl"]
+CMD ["-D","FOREGROUND"
+
+        </pre>
+        <button onclick="copyToClipboard()">Copy to Clipboard</button>
+        <p class="message" id="message"></p>
+    </div>
+    </div>
+    <div class="container-1">
+    <div class="container">
+        <h2>Build the docker image</h2>
+        <pre id="code-block">
+            docker build -t webserver:latest .
+
+        </pre>
+        <button onclick="copyToClipboard()">Copy to Clipboard</button>
+        <p class="message" id="message"></p>
+    </div>
+    </div>
+    </div>
+    <script src="\assets\index.js"></script>
+</body>
+</html>
